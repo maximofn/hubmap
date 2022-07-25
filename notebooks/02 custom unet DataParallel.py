@@ -201,7 +201,7 @@ def fit(model, dataloader, epochs=100, lr=3e-4, parallel=False):
             dice = dice_coeff(pred_mask, masks)
             train_loss.append(loss.item())
             train_dice.append(dice)
-            bar.set_description(f"\t\tloss {np.mean(train_loss):.5f}, dice {np.mean(train_dice):.5f}")
+            bar.set_description(f"loss {np.mean(train_loss):.5f}, dice {np.mean(train_dice):.5f}")
         hist['loss'].append(np.mean(train_loss))
         hist['dice'].append(np.mean(train_dice))
         bar = tqdm(dataloader['test'])
@@ -215,7 +215,7 @@ def fit(model, dataloader, epochs=100, lr=3e-4, parallel=False):
                 dice = dice_coeff(pred_mask, masks)
                 test_loss.append(loss.item())
                 test_dice.append(dice)
-                bar.set_description(f"\t\ttest_loss {np.mean(test_loss):.5f} test_dice {np.mean(test_dice):.5f}")
+                bar.set_description(f"test_loss {np.mean(test_loss):.5f} test_dice {np.mean(test_dice):.5f}")
         hist['test_loss'].append(np.mean(test_loss))
         hist['test_dice'].append(np.mean(test_dice))
         if len_int_epochs == 1:
@@ -226,6 +226,7 @@ def fit(model, dataloader, epochs=100, lr=3e-4, parallel=False):
             print(f"Epoch {(epoch+1):03d}/{epochs:03d} loss {np.mean(train_loss):.5f} dice {np.mean(train_dice):.5f} test_loss {np.mean(test_loss):.5f} test_dice {np.mean(test_dice):.5f}")
         elif len_int_epochs == 4:
             print(f"Epoch {(epoch+1):04d}/{epochs:04d} loss {np.mean(train_loss):.5f} dice {np.mean(train_dice):.5f} test_loss {np.mean(test_loss):.5f} test_dice {np.mean(test_dice):.5f}")
+        print("\n\n")
     return hist
 
 
